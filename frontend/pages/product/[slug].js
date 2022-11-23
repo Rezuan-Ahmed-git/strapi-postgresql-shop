@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-const Slug = ({ product }) => {
+const Slug = ({ product, addToCart }) => {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -160,10 +160,20 @@ const Slug = ({ product }) => {
                   ${product.attributes.price}
                 </span>
                 <div className="flex mx-2">
-                  <button className="flex mx-2 ml-auto text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded">
+                  <button
+                    onClick={() => {
+                      addToCart(slug, 1, product.attributes.price);
+                    }}
+                    className="flex mx-2 ml-auto text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded"
+                  >
                     Add to cart
                   </button>
-                  <button className="flex mx-2 ml-auto text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded">
+                  <button
+                    onClick={() => {
+                      router.push('/checkout');
+                    }}
+                    className="flex mx-2 ml-auto text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded"
+                  >
                     Checkout
                   </button>
                 </div>
